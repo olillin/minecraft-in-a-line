@@ -1,0 +1,10 @@
+{
+  "values": [
+    "stone_bricks",
+    "mossy_stone_bricks",
+    "cracked_stone_bricks",
+    "infested_stone_bricks",
+    "infested_mossy_stone_bricks",
+    "infested_cracked_stone_bricks"
+  ]
+}

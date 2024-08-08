@@ -1,0 +1,25 @@
+{
+  "pack": {
+    "pack_format": 48,
+    "description": [
+      {
+        "text": "An actual "
+      },
+      {
+        "text": "line",
+        "underlined": true
+      },
+      {
+        "text": " not some "
+      },
+      {
+        "text": "dumb",
+        "bold": true,
+        "color": "red"
+      },
+      {
+        "text": " plane"
+      }
+    ]
+  }
+}
