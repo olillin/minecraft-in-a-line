@@ -1,6 +1,7 @@
 gamemode spectator @s
 tag @a remove line.fortress_search.host
 tag @s add line.fortress_search.host
+tp @s ~ ~ ~
 function line:structure/fortress/generate
 tellraw @s {"text": "Waiting for fortress to generate...", "color": "yellow"}
 kill @e[type=marker,tag=line.fortress_search.generated]

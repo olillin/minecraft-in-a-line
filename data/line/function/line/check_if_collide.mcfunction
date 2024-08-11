@@ -1,2 +1,2 @@
-$execute positioned $(x) $(y) $(z) if entity @s[dx=0,dy=0,dz=0] positioned ~-1 ~-1 ~-1 if entity @s[dx=0,dy=0,dz=0] run return 1
+$execute positioned $(x) $(y) $(z) positioned ~-$(margin) ~-$(margin) ~-$(margin) if entity @s[dx=$(2margin),dy=$(2margin),dz=$(2margin)] positioned ~-1 ~-1 ~-1 if entity @s[dx=$(2margin),dy=$(2margin),dz=$(2margin)] run return 1
 return fail

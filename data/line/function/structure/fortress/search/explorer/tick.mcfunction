@@ -1,4 +1,4 @@
-execute unless score $fortress_search_active line matches 2 run return fail
+execute unless score #fortress_search_active line matches 2 run return fail
 execute if entity @s[tag=line.fortress_search.kill] run return run kill @s
 execute if entity @s[tag=line.fortress_search.dead] run return run tag @s add line.fortress_search.kill
 # particle explosion

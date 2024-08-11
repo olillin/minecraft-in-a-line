@@ -1,129 +1,129 @@
-data modify storage line:data Nearest set value {}
-data modify storage line:data Temp set value {}
-data modify storage line:data Temp.Var set value {}
+data modify storage line:pos Nearest set value {}
+data modify storage line:math Buffer set value {}
+data modify storage line:math Var set value {}
 
 # Get center of player
-data modify storage line:data Temp.Var.cx set from entity @s Pos[0]
-data modify storage line:data Temp.x set from entity @s Pos[1]
-data modify storage line:data Temp.y set value 0.9f
-function gm:add with storage line:data Temp
-data modify storage line:data Temp.Var.cy set from storage gm:io out
-data modify storage line:data Temp.Var.cz set from entity @s Pos[2]
+data modify storage line:math Var.cx set from entity @s Pos[0]
+data modify storage line:math Buffer.x set from entity @s Pos[1]
+data modify storage line:math Buffer.y set value 0.9f
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:math Var.cy set from storage gm:io out
+data modify storage line:math Var.cz set from entity @s Pos[2]
 
 # Calculate t = ((cx - ax)(bx-ax) + (cy - ay)(by-ay) + (cz - az)(bz-az))/((bx-ax)² + (by-ay)² + (bz-az)²)
 
 # a = (cx - ax)(bx-ax)
-data modify storage line:data Temp.x set from storage line:data Temp.Var.cx
-$data modify storage line:data Temp.y set from storage line:data $(positionA).x
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.a set from storage gm:io out
-$data modify storage line:data Temp.x set from storage line:data $(positionB).x
-$data modify storage line:data Temp.y set from storage line:data $(positionA).x
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage line:data Temp.a
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:multiply with storage line:data Temp
-data modify storage line:data Temp.Var.a set from storage gm:io out
+data modify storage line:math Buffer.x set from storage line:math Var.cx
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).x
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.a set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).x
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).x
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage line:math Buffer.a
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:multiply with storage line:math Buffer
+data modify storage line:math Var.a set from storage gm:io out
 # b = (cy - ay)(by-ay)
-data modify storage line:data Temp.x set from storage line:data Temp.Var.cy
-$data modify storage line:data Temp.y set from storage line:data $(positionA).y
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.b set from storage gm:io out
-$data modify storage line:data Temp.x set from storage line:data $(positionB).y
-$data modify storage line:data Temp.y set from storage line:data $(positionA).y
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage line:data Temp.b
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:multiply with storage line:data Temp
-data modify storage line:data Temp.Var.b set from storage gm:io out
+data modify storage line:math Buffer.x set from storage line:math Var.cy
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).y
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.b set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).y
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).y
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage line:math Buffer.b
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:multiply with storage line:math Buffer
+data modify storage line:math Var.b set from storage gm:io out
 # c = (cz - az)(bz-az))
-data modify storage line:data Temp.x set from storage line:data Temp.Var.cz
-$data modify storage line:data Temp.y set from storage line:data $(positionA).z
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.c set from storage gm:io out
-$data modify storage line:data Temp.x set from storage line:data $(positionB).z
-$data modify storage line:data Temp.y set from storage line:data $(positionA).z
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage line:data Temp.c
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:multiply with storage line:data Temp
-data modify storage line:data Temp.Var.c set from storage gm:io out
+data modify storage line:math Buffer.x set from storage line:math Var.cz
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).z
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.c set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).z
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).z
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage line:math Buffer.c
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:multiply with storage line:math Buffer
+data modify storage line:math Var.c set from storage gm:io out
 # d = a + b + c
-data modify storage line:data Temp.x set from storage line:data Temp.Var.a
-data modify storage line:data Temp.y set from storage line:data Temp.Var.b
-function gm:add with storage line:data Temp
-data modify storage line:data Temp.x set from storage gm:io out
-data modify storage line:data Temp.y set from storage line:data Temp.Var.c
-function gm:add with storage line:data Temp
-data modify storage line:data Temp.Var.d set from storage gm:io out
+data modify storage line:math Buffer.x set from storage line:math Var.a
+data modify storage line:math Buffer.y set from storage line:math Var.b
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage gm:io out
+data modify storage line:math Buffer.y set from storage line:math Var.c
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:math Var.d set from storage gm:io out
 
 # e = (bx-ax)²
-$data modify storage line:data Temp.x set from storage line:data $(positionB).x
-$data modify storage line:data Temp.y set from storage line:data $(positionA).x
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage gm:io out
-function gm:square with storage line:data Temp
-data modify storage line:data Temp.Var.e set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).x
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).x
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage gm:io out
+execute in overworld run function gm:square with storage line:math Buffer
+data modify storage line:math Var.e set from storage gm:io out
 # f = (by-ay)²
-$data modify storage line:data Temp.x set from storage line:data $(positionB).y
-$data modify storage line:data Temp.y set from storage line:data $(positionA).y
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage gm:io out
-function gm:square with storage line:data Temp
-data modify storage line:data Temp.Var.f set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).y
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).y
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage gm:io out
+execute in overworld run function gm:square with storage line:math Buffer
+data modify storage line:math Var.f set from storage gm:io out
 # g = (bz-az)²
-$data modify storage line:data Temp.x set from storage line:data $(positionB).z
-$data modify storage line:data Temp.y set from storage line:data $(positionA).z
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage gm:io out
-function gm:square with storage line:data Temp
-data modify storage line:data Temp.Var.g set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).z
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).z
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage gm:io out
+execute in overworld run function gm:square with storage line:math Buffer
+data modify storage line:math Var.g set from storage gm:io out
 # h = e + f + g
-data modify storage line:data Temp.x set from storage line:data Temp.Var.e
-data modify storage line:data Temp.y set from storage line:data Temp.Var.f
-function gm:add with storage line:data Temp
-data modify storage line:data Temp.x set from storage gm:io out
-data modify storage line:data Temp.y set from storage line:data Temp.Var.g
-function gm:add with storage line:data Temp
-data modify storage line:data Temp.Var.h set from storage gm:io out
+data modify storage line:math Buffer.x set from storage line:math Var.e
+data modify storage line:math Buffer.y set from storage line:math Var.f
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage gm:io out
+data modify storage line:math Buffer.y set from storage line:math Var.g
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:math Var.h set from storage gm:io out
 
 # t = d/h
-data modify storage line:data Temp.x set from storage line:data Temp.Var.d
-data modify storage line:data Temp.y set from storage line:data Temp.Var.h
-function gm:divide with storage line:data Temp
-data modify storage line:data Temp.Var.t set from storage gm:io out
+data modify storage line:math Buffer.x set from storage line:math Var.d
+data modify storage line:math Buffer.y set from storage line:math Var.h
+execute in overworld run function gm:divide with storage line:math Buffer
+data modify storage line:math Var.t set from storage gm:io out
 
 # Calculate point
 # x = ax + t(bx - ax)
-$data modify storage line:data Temp.x set from storage line:data $(positionB).x
-$data modify storage line:data Temp.y set from storage line:data $(positionA).x
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage line:data Temp.Var.t
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:multiply with storage line:data Temp
-$data modify storage line:data Temp.x set from storage line:data $(positionA).x
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:add with storage line:data Temp
-data modify storage line:data Nearest.x set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).x
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).x
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage line:math Var.t
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:multiply with storage line:math Buffer
+$data modify storage line:math Buffer.x set from storage line:pos $(positionA).x
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:pos Nearest.x set from storage gm:io out
 # y = ay + t(by - ay)
-$data modify storage line:data Temp.x set from storage line:data $(positionB).y
-$data modify storage line:data Temp.y set from storage line:data $(positionA).y
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage line:data Temp.Var.t
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:multiply with storage line:data Temp
-$data modify storage line:data Temp.x set from storage line:data $(positionA).y
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:add with storage line:data Temp
-data modify storage line:data Nearest.y set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).y
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).y
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage line:math Var.t
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:multiply with storage line:math Buffer
+$data modify storage line:math Buffer.x set from storage line:pos $(positionA).y
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:pos Nearest.y set from storage gm:io out
 # z = az + t(bz - az)
-$data modify storage line:data Temp.x set from storage line:data $(positionB).z
-$data modify storage line:data Temp.y set from storage line:data $(positionA).z
-function gm:subtract with storage line:data Temp
-data modify storage line:data Temp.x set from storage line:data Temp.Var.t
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:multiply with storage line:data Temp
-$data modify storage line:data Temp.x set from storage line:data $(positionA).z
-data modify storage line:data Temp.y set from storage gm:io out
-function gm:add with storage line:data Temp
-data modify storage line:data Nearest.z set from storage gm:io out
+$data modify storage line:math Buffer.x set from storage line:pos $(positionB).z
+$data modify storage line:math Buffer.y set from storage line:pos $(positionA).z
+execute in overworld run function gm:subtract with storage line:math Buffer
+data modify storage line:math Buffer.x set from storage line:math Var.t
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:multiply with storage line:math Buffer
+$data modify storage line:math Buffer.x set from storage line:pos $(positionA).z
+data modify storage line:math Buffer.y set from storage gm:io out
+execute in overworld run function gm:add with storage line:math Buffer
+data modify storage line:pos Nearest.z set from storage gm:io out
