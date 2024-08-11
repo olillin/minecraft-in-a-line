@@ -1,0 +1,1 @@
+$execute summon marker run function line:position/_set {position: "$(position)"}

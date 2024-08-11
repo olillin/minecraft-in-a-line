@@ -1,2 +1,0 @@
-execute unless data storage line:pos Stronghold run return run schedule function line:load/wait_for_stronghold 10
-execute as @p unless data storage line:pos Fortress align xyz in minecraft:the_nether positioned 0 0 0 run function line:structure/fortress/find_spawner

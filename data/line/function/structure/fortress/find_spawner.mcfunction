@@ -2,8 +2,5 @@ gamemode spectator @s
 tag @a remove line.fortress_search.host
 tag @s add line.fortress_search.host
 tp @s ~ ~ ~
-function line:structure/fortress/generate
-tellraw @s {"text": "Waiting for fortress to generate...", "color": "yellow"}
-kill @e[type=marker,tag=line.fortress_search.generated]
-execute at @s run summon marker ~ ~ ~ {Tags: ["line", "line.fortress_search", "line.fortress_search.generated"]}
-schedule function line:structure/fortress/wait_for_generation 1
+tellraw @s {"text": "Teleporting to nether...", "color": "yellow"}
+execute at @s run function line:position/await_loaded {command: "execute as @a[tag=line.load.host] at @s run function line:structure/fortress/in_nether"}

@@ -1,2 +1,0 @@
-execute at @a[tag=line.stronghold_search.host,limit=1] if loaded ~ ~ ~ if loaded ~32 ~ ~ if loaded ~-32 ~ ~ if loaded ~ ~ ~32 if loaded ~ ~ ~-32 if entity @e[type=marker,tag=line.stronghold_search.generated,distance=..5] run schedule function line:structure/stronghold/generated 1
-schedule function line:structure/stronghold/wait_for_generation 1

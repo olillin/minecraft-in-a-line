@@ -1,0 +1,2 @@
+execute unless data storage line:position Fortress in minecraft:the_nether positioned 0 0 0 run function line:structure/fortress/find_spawner
+function line:position/await {position: "Fortress", command: "execute as @a[tag=line.load.host] at @s run function line:load/post_fortress"}
