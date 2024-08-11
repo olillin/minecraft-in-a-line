@@ -1,4 +1,5 @@
 scoreboard objectives add line dummy
+scoreboard objectives add line.respawn minecraft.custom:time_since_death
 gamerule spawnRadius 0
 gamerule spectatorsGenerateChunks true
 
