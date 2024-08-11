@@ -5,6 +5,7 @@ gamerule spectatorsGenerateChunks true
 
 # Default config
 execute unless data storage line:config margin run data modify storage line:config margin set value 1.0d
+execute unless data storage line:config teleport_force run data modify storage line:config teleport_force set value 0.2d
 execute unless data storage line:config mode run data modify storage line:config mode set value 1
 
 # Hardcoded locations

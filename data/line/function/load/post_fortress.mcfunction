@@ -1,2 +1,2 @@
-tellraw @s {"text": "Minecraft in a LINE finished loading", "color": "green"}
+tellraw @s [{"text": "Minecraft in a LINE finished loading, run ", "color": "green"}, {"text": "/function line:config", "color": "gold", "underlined": true, "clickEvent": {"action": "run_command", "value": "/function line:config"}}," to configure"]
 tag @s remove line.load.host
